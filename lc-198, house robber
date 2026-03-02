@@ -1,0 +1,35 @@
+"""def helper(i,nums):
+    if i>=len(nums):
+        return 0
+    return nums[i]+helper(i+2,nums)
+
+def helper1(j,nums):
+    if j>=len(nums):
+        return 0
+    return nums[j]+helper(j+2,nums)
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums)==0:
+            return 0
+        if len(nums)==1:
+            return nums[0]
+        if len(nums)==2:
+            return max(nums)
+        return max(helper(0,nums),helper1(1,nums))"""
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n=len(nums)
+        if n==0:
+            return 0
+        if n==1:
+            return nums[0]
+        if n==2:
+            return max(nums)
+        dp=[-1]*(n)
+        dp[0]=nums[0]
+        dp[1]=max(nums[0],nums[1])
+        for i in range(2,n):
+            dp[i]=max(nums[i]+dp[i-2],dp[i-1])
+        return dp[n-1] 
+        
